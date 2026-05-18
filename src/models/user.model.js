@@ -26,6 +26,12 @@ const userSchema = new mongoose.Schema(
 			enum: ['user', 'admin'],
 			default: 'user'
 		},
+		
+		provider: {
+			type: String,
+			enum: ['local', 'github'],
+			default: 'local'
+		}
 	}, 
 	{ timestamps: true }
 );

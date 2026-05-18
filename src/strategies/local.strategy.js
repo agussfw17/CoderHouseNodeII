@@ -3,8 +3,6 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import bcrypt from 'bcrypt';
 import User from '../models/user.model.js';
 
-console.log('LOCAL STRATEGY LOADED');
-
 passport.use(
 	"local",
 	new LocalStrategy(

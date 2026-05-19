@@ -6,10 +6,7 @@ import User from '../models/user.model.js';
 passport.use(
 	"local",
 	new LocalStrategy(
-		{
-			usernameField: 'email'
-		},
-
+		{ usernameField: 'email' },
 		async (email, password, done) => {
 			try {
 

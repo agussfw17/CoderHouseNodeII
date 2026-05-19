@@ -6,14 +6,17 @@ import MongoStore from 'connect-mongo';
 
 import passport from './config/passport.js';
 
-import { errorMiddleware } from './middlewares/error.middleware.js';
+import { errorMiddleware, notFoundMiddleware } from './middlewares/error.middleware.js';
 
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 import sessionRoutes from './routes/session.routes.js';
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true
+}));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -41,13 +44,7 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/session', sessionRoutes);
 
-app.use('*', (req, res) => {
-    res.status(404).json({
-        success: false,
-        error: 'Route not found'
-    });
-});
-
+app.use(notFoundMiddleware);
 app.use(errorMiddleware);
 
 export default app;
